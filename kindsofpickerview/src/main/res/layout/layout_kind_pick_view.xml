@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="@color/color_ffffff">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_cancel_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_F1F3F9">
+
+        <TextView
+            android:id="@+id/tv_pick_view_cancel"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center|left"
+            android:text="取消"
+            android:textColor="@color/color_A6A6C0"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pick_view_sure"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center|right"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="确认"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/color_405182"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ListView
+        android:id="@+id/lv_kind_of_pick_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_cancel_sure" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

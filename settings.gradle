@@ -1,0 +1,4 @@
+include ':example'
+include ':kindsofpickerview'
+include ':app'
+rootProject.name = "KindsOfPickerView"
