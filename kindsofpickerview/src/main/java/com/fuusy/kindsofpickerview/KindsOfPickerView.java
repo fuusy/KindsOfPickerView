@@ -1,9 +1,7 @@
 package com.fuusy.kindsofpickerview;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.util.SparseBooleanArray;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -15,20 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.fuusy.kindsofpickerview.adapter.PickAdapter;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fuusy.kindsofpickerview.config.Constant.CHOICE_MODE_SINGLE;
 
 /**
  * @author fuusy
  * @date：2021/6/4
- * @instruction：自定义单选和多选的选择器
+ * @instruction：自定义单选和多选的选择器。
  */
 public class KindsOfPickerView extends Dialog {
     private static final String TAG = "KindsOfPickerView";
@@ -60,18 +58,26 @@ public class KindsOfPickerView extends Dialog {
         WindowManager.LayoutParams params = window.getAttributes();
         Display display = context.getDisplay();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = (int) (display.getHeight() * 0.4);
+        params.height = (int) (display.getHeight() * mPickerOptions.heightRatio);
         window.setAttributes(params);
         setCanceledOnTouchOutside(mPickerOptions.cancelable);
 
         final ListView listView = view.findViewById(R.id.lv_kind_of_pick_view);
         listView.setChoiceMode(mPickerOptions.choiceMode);
         mPickAdapter = new PickAdapter();
-        listView.setAdapter(mPickAdapter);
         mPickAdapter.setList(mPickerOptions.itemList, mPickerOptions.titleList);
+        mPickAdapter.setOptions(mPickerOptions);
+        listView.setAdapter(mPickAdapter);
+
+        //设置ListView的分割线
+        if (mPickerOptions.isShowLine) {
+            listView.setDividerHeight(mPickerOptions.lineHeight);
+        } else {
+            listView.setDividerHeight(0);
+        }
 
         //设置默认选择
-        if (mPickerOptions.choiceMode == ListView.CHOICE_MODE_SINGLE) {
+        if (mPickerOptions.choiceMode == CHOICE_MODE_SINGLE) {
             //单选
             listView.setItemChecked(mPickerOptions.defaultSelectOnSingle, true);
         } else {
@@ -111,7 +117,6 @@ public class KindsOfPickerView extends Dialog {
         //取消、确认整体背景
         ConstraintLayout clCancelSure = view.findViewById(R.id.cl_cancel_sure);
         clCancelSure.setBackgroundColor(context.getResources().getColor(mPickerOptions.cancelSureBgColor));
-
     }
 
     /**
@@ -156,6 +161,10 @@ public class KindsOfPickerView extends Dialog {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (mPickerOptions.itemClickListener != null) {
+                    mPickerOptions.itemClickListener.onItemClick(position);
+                }
                 if (position == mPickerOptions.cancelAllPosition) {
                     //如果点击的是取消全选item
                     for (int i = 0; i < mPickerOptions.itemList.size(); i++) {

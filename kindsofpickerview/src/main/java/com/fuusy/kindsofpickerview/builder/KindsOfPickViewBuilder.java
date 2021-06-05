@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.fuusy.kindsofpickerview.KindsOfPickerView;
 import com.fuusy.kindsofpickerview.PickerOptions;
+import com.fuusy.kindsofpickerview.callback.OnItemClickListener;
 import com.fuusy.kindsofpickerview.callback.OnOptionSelectMultipleListener;
 import com.fuusy.kindsofpickerview.callback.OnOptionSelectSingleListener;
 
@@ -53,6 +54,17 @@ public class KindsOfPickViewBuilder {
     }
 
     /**
+     * 设置ListView的item点击事件
+     *
+     * @param listener 点击事件
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder setItemClickListener(OnItemClickListener listener) {
+        mPickerOptions.itemClickListener = listener;
+        return this;
+    }
+
+    /**
      * 设置pickView的位置.
      *
      * @param value Gravity.BOTTOM ,Gravity.TOP ...
@@ -87,6 +99,28 @@ public class KindsOfPickViewBuilder {
         return this;
     }
 
+    /**
+     * 设置CheckBox的样式
+     *
+     * @param drawableId drawableId
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder setCheckBoxStyle(int drawableId) {
+        mPickerOptions.checkBoxButtonStyle = drawableId;
+        return this;
+    }
+
+    /**
+     * 设置ListView占用屏幕的比例
+     *
+     * @param ratio 比例
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder setHeightRatio(float ratio) {
+        mPickerOptions.heightRatio = ratio;
+        return this;
+    }
+
 
     /**
      * 设置ListView的ITem值
@@ -114,7 +148,7 @@ public class KindsOfPickViewBuilder {
     /**
      * 设置PickView的风格
      *
-     * @param style style
+     * @param style style ITEM_STYLE_DEFAULT、ITEM_STYLE_CHECK_BOX、ITEM_STYLE_SWITCH
      * @return KindsOfPickViewBuilder
      */
     public KindsOfPickViewBuilder setStyle(int style) {
@@ -230,6 +264,50 @@ public class KindsOfPickViewBuilder {
      */
     public KindsOfPickViewBuilder setDefaultSelectOnMulti(List<Integer> positionList) {
         mPickerOptions.defaultSelectOnMulti = positionList;
+        return this;
+    }
+
+    /**
+     * 设置item高度
+     *
+     * @param height 高度
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder setItemHeight(int height) {
+        mPickerOptions.itemHeight = height;
+        return this;
+    }
+
+    /**
+     * 是否显示分割线
+     *
+     * @param isShow boolean
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder isShowLine(boolean isShow) {
+        mPickerOptions.isShowLine = isShow;
+        return this;
+    }
+
+    /**
+     * 设置分割线的高度。
+     *
+     * @param height 高度 默认1
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder setLineHeight(int height) {
+        mPickerOptions.lineHeight = height;
+        return this;
+    }
+
+    /**
+     * 设置Item的样式，checkBox switch
+     *
+     * @param style checkBox switch
+     * @return KindsOfPickViewBuilder
+     */
+    public KindsOfPickViewBuilder setItemStyle(int style) {
+        mPickerOptions.itemStyle = style;
         return this;
     }
 
